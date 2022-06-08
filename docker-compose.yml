@@ -1,0 +1,9 @@
+version: '3.5'
+
+services:
+  officeplanner:
+    image: ghcr.io/entur/officeplanner:main
+    # environment:
+      # SLACK_BOT_TOKEN: xoxb-xxx-xxx-xxx
+    volumes:
+      - ./test.txt:/app/channels.txt
