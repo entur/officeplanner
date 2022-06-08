@@ -21,6 +21,8 @@ To add a new channel:
 
 ## Slack Bot configuration
 
+You need to create a Slack app yourself at https://api.slack.com/apps/
+
 Create a new Slack app, customize it as you prefer.
 
 The bot requires the following **bot token scopes**:
@@ -30,10 +32,32 @@ The bot requires the following **bot token scopes**:
 
 Install the bot to you slack organization after setting permissions, you will get a new slack bot token afterwards.
 
-## Using docker
+## Using the script
 
-You need two things, a `.txt` file containing name of the slack channels and a environment variable for the bot token.
+As a pre-requsite, you'll need to have 5 custom emojies representing each day in your slack organization. Without the emojies defined in the list below, the script will fail.
 
-The .txt file should be mounted to `/app/channels.txt` in the docker container.
+- `:monday:`
+- `:tuesday:`
+- `:wednesday:`
+- `:thursday:`
+- `:friday:`
 
-Set the `SLACK_BOT_TOKEN` environment variable with the token you got when creating the slack app.
+> Example emojies can be found under the `examples/` folder.
+
+To run the script you need two things, a `.txt` file containing name of the slack channels and a environment variable for the bot token.
+
+#### Python
+
+If you are using python, then a `channels.txt` file should exist next to the `officeplanner.py` script and the `SLACK_BOT_TOKEN` must be populated in the same shell as the one running python.
+
+#### Docker
+
+The latest docker image is available on github packages, and is updated when a PR is pushed to the `main` branch.
+
+```
+ghcr.io/entur/officeplanner:main
+```
+
+Mount a `.txt` file to `/app/channels.txt` in the docker container.
+
+Populate a `SLACK_BOT_TOKEN` environment variable with the token you got when creating the slack app.
