@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "officeplanner"
+version = "1.0.0"
+authors = [{ name = "Entur AS" }]
+description = "A small utility for indicating presence at the offices, via slack."
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: EUPL License",
+  "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/entur/officeplanner"
+"Bug Tracker" = "https://github.com/entur/officeplanner/issues"
