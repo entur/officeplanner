@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "officeplanner"
-version = "0.0.1"
+version = "1.0.0"
 authors = [{ name = "Entur AS" }]
 description = "A small utility for indicating presence at the offices, via slack."
 readme = "README.md"
