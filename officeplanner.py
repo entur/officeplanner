@@ -5,6 +5,7 @@ import time
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 
+force_lint_ERROR= "THIS IS BAD"
 GREETING = "When are you planning to be in-office next week?"
 OK = "ok"
 ERROR = "error"
