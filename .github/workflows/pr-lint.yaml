@@ -1,6 +1,8 @@
 name: Build docker image
 
-on: [pull_request]
+on:
+  - pull_request
+  - workflow_dispatch
 
 jobs:
   build-and-lint:
