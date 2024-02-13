@@ -5,7 +5,11 @@ import time
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 
-GREETING = "When are you planning to be in-office next week?"
+MODE = os.environ.get('MODE', 'file')
+CHANNELS_FILE = os.environ.get('CHANNELS_FILE', 'channels.txt')
+SLACK_CHANNEL= os.environ.get('SLACK_CHANNEL', '#office-planner')
+GREETING = os.environ.get('GREETING', "When are you planning to be in-office next week?")
+
 OK = "ok"
 ERROR = "error"
 MSG = "message"
@@ -18,8 +22,11 @@ ASSERT_ERROR = "Expected error state to be true"
 
 client = WebClient(token=os.environ['SLACK_BOT_TOKEN'])
 
-with open('channels.txt', 'r', encoding='UTF-8') as file:
-    channels = [line.rstrip() for line in file]
+if MODE == 'file':
+    with open(CHANNELS_FILE, 'r', encoding='UTF-8') as file:
+        channels = [line.rstrip() for line in file]
+elif MODE == 'single':
+    channels = [SLACK_CHANNEL]
 
 for channel in channels:
     try:
