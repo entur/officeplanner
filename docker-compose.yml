@@ -2,8 +2,12 @@ version: '3.5'
 
 services:
   officeplanner:
-    image: ghcr.io/entur/officeplanner:main
+    #image: ghcr.io/entur/officeplanner:main
+    build: .
     # environment:
+      # MODE: single
+      # SLACK_CHANNEL: '#tmp-test-officeplanner'
       # SLACK_BOT_TOKEN: xoxb-xxx-xxx-xxx
-    volumes:
-      - ./test.txt:/app/channels.txt
+      # GREETING=Attention woker drones, prepare yourselves for the grand return to the hive next week! We expect nothing but peak productivity and unwavering loyalty upon your return.
+    # volumes:
+    #   - ./channels.txt:/app/channels.txt

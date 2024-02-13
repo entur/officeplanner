@@ -32,6 +32,8 @@ The bot requires the following **bot token scopes**:
 
 Install the bot to you slack organization after setting permissions, you will get a new slack bot token afterwards.
 
+Populate a `SLACK_BOT_TOKEN` environment variable with the token you got when creating the slack app.
+
 ## Using the script
 
 As a pre-requsite, you'll need to have 5 custom emojies representing each day in your slack organization. Without the emojies defined in the list below, the script will fail.
@@ -44,13 +46,22 @@ As a pre-requsite, you'll need to have 5 custom emojies representing each day in
 
 > Example emojies can be found under the `examples/` folder.
 
-To run the script you need two things, a `.txt` file containing name of the slack channels and a environment variable for the bot token.
+### Slack channel mode
 
-#### Python
+There are two modes available, which can be changed using the `MODE` environment variable:
 
-If you are using python, then a `channels.txt` file should exist next to the `officeplanner.py` script and the `SLACK_BOT_TOKEN` must be populated in the same shell as the one running python.
+  - `file` (default)
+    - Expects a `.txt` file with channel names, iterates over each line in file.
+    - Default is `/app/channels.txt`, can be overridden with the `CHANNELS_FILE` environment variable.
+  - `single`
+    - Sends the message to a single slack channel.
+    - Enter the slack channel (with # prefix) in the `SLACK_CHANNEL` environment variable.
 
-#### Docker
+#### File mode
+
+If you are using the default File mode, then a `channels.txt` file must exist next to the `officeplanner.py` script, or mounted as a Volume in Docker.
+
+### Docker
 
 The latest docker image is available on github packages, and is updated when a PR is pushed to the `main` branch.
 
@@ -60,4 +71,65 @@ ghcr.io/entur/officeplanner:main
 
 Mount a `.txt` file to `/app/channels.txt` in the docker container.
 
-Populate a `SLACK_BOT_TOKEN` environment variable with the token you got when creating the slack app.
+### Kubernetes Cronjob
+
+```yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: office-planner
+spec:
+  schedule: 0 9 * * 1
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      activeDeadlineSeconds: 3600
+      backoffLimit: 100
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: office-planner
+              image: office-planner:v1.0.1
+              env:
+                - name: MODE
+                  value: single
+                - name: SLACK_CHANNEL
+                  value: '#di-analyse'
+                - name: TZ
+                  value: Europe/Oslo
+                - name: GREETING
+                  valueFrom:
+                    configMapKeyRef:
+                      key: greeting
+                      name: ap-office-planner
+                - name: SLACK_BOT_TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      key: SLACK_BOT_TOKEN
+                      name: slack-token-office-planner
+              livenessProbe:
+                exec:
+                  command:
+                    - python3
+                    - '--version' # TODO: add native health check
+                failureThreshold: 3
+                initialDelaySeconds: 30
+                periodSeconds: 10
+              resources:
+                requests:
+                  cpu: 25m
+                  memory: 25Mi
+                limits:
+                  memory: 50Mi
+              securityContext:
+                allowPrivilegeEscalation: false
+                capabilities:
+                  drop:
+                    - ALL
+                readOnlyRootFilesystem: true
+                runAsNonRoot: true
+                runAsUser: 1000
+          securityContext:
+            fsGroup: 2000
+```
