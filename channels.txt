@@ -1,5 +1,5 @@
 /*
- Example content for this file is bellow this comment.
+ Example content for this file is below this comment. Remove the comment section before use.
  For Entur this file is located in another Repo https://github.com/entur/slack-at-office
 */
 #team-foo
