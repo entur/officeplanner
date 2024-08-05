@@ -1,2 +1,3 @@
+# For Entur this file is located in another Repo https://github.com/entur/slack-at-office
 #team-foo
 #team-bar
