@@ -1,2 +1,6 @@
+/*
+ Example content for this file is below this comment. Remove the comment section before use.
+ For Entur, this file is maintained in a separate repository: https://github.com/entur/slack-at-office
+*/
 #team-foo
 #team-bar
