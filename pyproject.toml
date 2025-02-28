@@ -11,7 +11,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 classifiers = [
   "Programming Language :: Python :: 3",
-  "License :: OSI Approved :: EUPL License",
+  "License :: OSI Approved :: European Union Public Licence 1.2 (EUPL 1.2)",
   "Operating System :: OS Independent",
 ]
 dynamic = ["dependencies"]
@@ -28,7 +28,7 @@ dependencies = { file = ["requirements.in"] }
 
 [tool.ruff]
 line-length = 120
-indent-width = 2
+indent-width = 4 # python nastiness
 target-version = 'py312'
 exclude = []
 
