@@ -3,19 +3,14 @@ name: Build docker image
 on: [pull_request]
 
 jobs:
-  build-and-lint:
-    runs-on: ubuntu-latest
+  docker-lint:
+    uses: entur/gha-docker/.github/workflows/lint.yml@v1
+  python-lint:
+    runs-on: ubuntu-24.04
     permissions:
-      contents: read
-
+      contents: write
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: Silleellie/pylint-github-action@v2.1
         with:
-          fetch-depth: 0
-
-      - name: Build Docker image
-        uses: docker/build-push-action@5176d81f87c23d6fc96624dfdbcd9f3830bbe445
-        with:
-          context: .
-          push: false
+          lint-path: officeplanner.py
+          python-version: 3.12

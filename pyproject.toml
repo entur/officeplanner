@@ -14,7 +14,14 @@ classifiers = [
   "License :: OSI Approved :: EUPL License",
   "Operating System :: OS Independent",
 ]
+dynamic = ["dependencies"]
 
 [project.urls]
 "Homepage" = "https://github.com/entur/officeplanner"
 "Bug Tracker" = "https://github.com/entur/officeplanner/issues"
+
+[tool.pip-tools]
+generate_hashes = true
+
+[tool.setuptools.dynamic]
+dependencies = { file = ["requirements.in"] }
