@@ -1,4 +1,4 @@
-name: Build docker image
+name: Pull Request Lint
 
 on: [pull_request]
 
