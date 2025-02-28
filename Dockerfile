@@ -1,16 +1,10 @@
-FROM python:3-alpine as main
-
+FROM python:3-alpine
+ENV PYTHONUNBUFFERED=1
 WORKDIR /app
-
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 USER appuser
-
-COPY requirements.txt requirements.txt
-RUN pip3 install -r requirements.txt
-
-COPY officeplanner.py officeplanner.py
-
-RUN pip3 install pylint
-RUN python -m pylint officeplanner.py
-
-CMD [ "python3", "officeplanner.py" ]
+COPY requirements.txt \
+  officeplanner.py \
+  ./
+RUN pip install --no-cache-dir -r requirements.txt
+CMD [ "venv/bin/python", "officeplanner.py" ]

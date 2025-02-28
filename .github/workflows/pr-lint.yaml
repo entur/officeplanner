@@ -1,21 +1,18 @@
-name: Build docker image
+name: Pull Request Lint
 
 on: [pull_request]
 
 jobs:
-  build-and-lint:
-    runs-on: ubuntu-latest
+  docker-lint:
+    uses: entur/gha-docker/.github/workflows/lint.yml@v1
+  python-lint:
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-
-      - name: Build Docker image
-        uses: docker/build-push-action@5176d81f87c23d6fc96624dfdbcd9f3830bbe445
-        with:
-          context: .
-          push: false
+          fetch-depth: 2
+      - uses: astral-sh/ruff-action@39f75e526a505e26a302f8796977b50c13720edf # v3.2.1
+      - run: ruff check
+      - run: ruff format --check
