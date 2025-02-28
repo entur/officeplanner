@@ -1,7 +1,5 @@
 # Slack team location planner
 
-![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python&logoColor=white)
-
 We created a simple solution for getting a overview for planning when people in the team are coming into the office, without the need to introduce any new tools or complex 3rd-party slack applications.
 
 This python script posts a message in multiple slack channels, and responds to the same message with 5 emojies that represent the weekdays.

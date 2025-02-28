@@ -8,9 +8,8 @@ jobs:
   python-lint:
     runs-on: ubuntu-24.04
     permissions:
-      contents: write
+      contents: read
     steps:
-      - uses: Silleellie/pylint-github-action@v2.1
-        with:
-          lint-path: officeplanner.py
-          python-version: 3.12
+      - uses: astral-sh/ruff-action@39f75e526a505e26a302f8796977b50c13720edf # v3.2.1
+      - run: ruff check
+      - run: ruff format
