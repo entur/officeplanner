@@ -27,10 +27,12 @@ generate_hashes = true
 dependencies = { file = ["requirements.in"] }
 
 [tool.ruff]
+required-version = ">=0.9.8"
 line-length = 120
 indent-width = 4 # python nastiness
 target-version = 'py312'
 exclude = []
+include = ["pyproject.toml", "**.py"]
 
 [tool.ruff.format]
 quote-style = "double"
