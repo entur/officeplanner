@@ -10,6 +10,9 @@ jobs:
     permissions:
       contents: read
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
       - uses: astral-sh/ruff-action@39f75e526a505e26a302f8796977b50c13720edf # v3.2.1
       - run: ruff check
-      - run: ruff format
+      - run: ruff format --check .
