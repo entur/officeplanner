@@ -1,6 +1,6 @@
 # Slack team location planner
 
-![pylint]()
+![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python&logoColor=white)
 
 We created a simple solution for getting a overview for planning when people in the team are coming into the office, without the need to introduce any new tools or complex 3rd-party slack applications.
 
