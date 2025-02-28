@@ -6,5 +6,5 @@ USER appuser
 COPY requirements.txt \
   officeplanner.py \
   ./
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 CMD [ "venv/bin/python", "officeplanner.py" ]
