@@ -13,6 +13,6 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 2
-      - uses: astral-sh/ruff-action@39f75e526a505e26a302f8796977b50c13720edf # v3.2.1
+      - uses: astral-sh/ruff-action@c6bea5606c33b5d04902374392d9233464b90660 # v3.3.0
       - run: ruff check
       - run: ruff format --check
