@@ -4,7 +4,7 @@
 #
 #    pip-compile --generate-hashes
 #
-slack-sdk==3.40.0 \
-    --hash=sha256:87b9a79d1d6e19a2b1877727a0ec6f016d82d30a6a410389fba87c221c99f10e \
-    --hash=sha256:f2bada5ed3adb10a01e154e90db01d6d8938d0461b5790c12bcb807b2d28bbe2
+slack-sdk==3.40.1 \
+    --hash=sha256:a215333bc251bc90abf5f5110899497bf61a3b5184b6d9ee35d73ebf09ec3fd0 \
+    --hash=sha256:cd8902252979aa248092b0d77f3a9ea3cc605bc5d53663ad728e892e26e14a65
     # via -r requirements.in
